@@ -1,4 +1,4 @@
-import io.agates.sorting.merge;
+import io.agates.sorting.Merge;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class Main {
                     .boxed()
                     .collect(Collectors.toList());
 
-            merge.bottomUpMergeSort(array, new ArrayList<>(Collections.nCopies(array.size(), 0)));
+            Merge.bottomUpMergeSort(array, new ArrayList<>(Collections.nCopies(array.size(), 0)));
 
             boolean sorted = isSorted(array);
             // TODO: Add some tests and timing information

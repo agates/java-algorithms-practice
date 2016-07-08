@@ -8,7 +8,7 @@ import java.util.List;
  * best, average and worst case.
  * For this reason it is useful for real time operations where predictability is important
  */
-public class merge {
+public class Merge {
     /**
      * Sorts a list using a recursive (top-down) approach
      * @param a The list to sort

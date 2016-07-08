@@ -1,3 +1,4 @@
+import io.agates.searching.BinarySearch;
 import io.agates.sorting.Merge;
 
 import java.util.*;
@@ -7,15 +8,21 @@ public class Main {
     public static void main(String[] args) {
         Random r = new Random();
 
-        for (int length = 1; length <= 1024; ++length) {
-            List<Integer> array = Arrays.stream(r.ints(length, 0, length * 10).toArray())
+        for (int length = 1; length <= Math.pow(2, 16); length *= 2) {
+            List<Integer> array = Arrays.stream(r.ints(length, 0, length).toArray())
                     .boxed()
                     .collect(Collectors.toList());
+            List<Integer> workList = new ArrayList<>(Collections.nCopies(array.size(), 0));
 
-            Merge.bottomUpMergeSort(array, new ArrayList<>(Collections.nCopies(array.size(), 0)));
+            Integer searchItem = array.get(array.size() / 2);
+
+            Merge.bottomUpMergeSort(array, workList);
 
             boolean sorted = isSorted(array);
             // TODO: Add some tests and timing information
+
+            //int index = BinarySearch.binarySearchRecursive(array, searchItem);
+            int index = BinarySearch.binarySearchIterative(array, searchItem);
         }
     }
 

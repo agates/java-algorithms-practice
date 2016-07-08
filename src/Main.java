@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Random r = new Random();
 
-        for (int length = 1; length < 1000; ++length) {
+        for (int length = 1; length <= 1024; ++length) {
             List<Integer> array = Arrays.stream(r.ints(length, 0, length * 10).toArray())
                     .boxed()
                     .collect(Collectors.toList());

@@ -4,13 +4,18 @@ import java.util.List;
 
 /**
  * Created by agates on 7/7/16.
- * <p>
  * Merge sort uses O(n log n) time and O(n) external space for both
  * best, average and worst case.
- * <p>
- * For this reason it is useful for
+ * For this reason it is useful for real time operations where predictability is important
  */
 public class merge {
+    /**
+     * Sorts a list using a recursive (top-down) approach
+     * @param a The list to sort
+     * @param workList List for use as a temporary workspace.
+     *                 Should be at least as long as "a"
+     * @param <T> Any class that implements Comparable<T>
+     */
     public static <T extends Comparable<T>> void topDownMergeSort(List<T> a, List<T> workList) {
         if (workList.size() < a.size()) {
             // worklist is not large enough to hold the list data
@@ -35,7 +40,13 @@ public class merge {
         }
     }
 
-
+    /**
+     * Sort a list using an iterative (bottom-up) approach
+     * @param a The list to sort
+     * @param workList List for use as a temporary workspace.
+     *                 Should be at least as long as "a"
+     * @param <T> Any class that implements Comparable<T>
+     */
     public static <T extends Comparable<T>> void bottomUpMergeSort(List<T> a, List<T> workList) {
         if (workList.size() < a.size()) {
             // worklist is not large enough to hold the list data

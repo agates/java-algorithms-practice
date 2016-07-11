@@ -12,11 +12,15 @@ import java.util.List;
  */
 public class BinarySearch {
     public static <T extends Comparable<T>> int binarySearchRecursive(List<T> a, T item) {
+        if (a == null) {
+            return -1;
+        }
+
         return binarySearchRecursive(a, item, 0, a.size() - 1);
     }
 
-    public static <T extends Comparable<T>> int binarySearchRecursive(List<T> a, T item, int lower, int upper) {
-        if (lower > upper) {
+    private static <T extends Comparable<T>> int binarySearchRecursive(List<T> a, T item, int lower, int upper) {
+        if (lower > upper || upper >= a.size() || a == null) {
             return -1;
         }
 
@@ -34,6 +38,10 @@ public class BinarySearch {
     }
 
     public static <T extends Comparable<T>> int binarySearchIterative(List<T> a, T item) {
+        if (a == null) {
+            return -1;
+        }
+
         int lower = 0,
                 upper = a.size() - 1,
                 mid,

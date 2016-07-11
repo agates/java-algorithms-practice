@@ -20,12 +20,12 @@ public class Merge {
     public static <T extends Comparable<T>> void topDownMergeSort(List<T> a, List<T> workList) {
         if (workList.size() < a.size()) {
             // worklist is not large enough to hold the list data
-            return;
+            throw new InsufficientWorklistSizeException();
         }
         topDownSplitMerge(a, 0, a.size(), workList);
     }
 
-    public static <T extends Comparable<T>> void topDownSplitMerge(List<T> a, int begin, int end, List<T> b) {
+    private static <T extends Comparable<T>> void topDownSplitMerge(List<T> a, int begin, int end, List<T> b) {
         if (end - begin < 2) {
             return;
         }
@@ -51,12 +51,12 @@ public class Merge {
     public static <T extends Comparable<T>> void bottomUpMergeSort(List<T> a, List<T> workList) {
         if (workList.size() < a.size()) {
             // worklist is not large enough to hold the list data
-            return;
+            throw new InsufficientWorklistSizeException();
         }
         bottomUpSplitMerge(a, workList);
     }
 
-    public static <T extends Comparable<T>> void bottomUpSplitMerge(List<T> a, List<T> b) {
+    private static <T extends Comparable<T>> void bottomUpSplitMerge(List<T> a, List<T> b) {
         int n = a.size();
         boolean swapped = false;
         List<T> temp = b;
@@ -101,38 +101,6 @@ public class Merge {
                 ++i;
             } else {
                 b.set(k, a.get(j));
-                ++j;
-            }
-        }
-    }
-
-
-    public static void topDownMergeSort(int[] a) {
-        topDownSplitMerge(a, 0, a.length, new int[a.length]);
-    }
-
-    private static void topDownSplitMerge(int[] a, int begin, int end, int[] b) {
-        if (end - begin < 2) {
-            return;
-        }
-
-        int middle = (end + begin) / 2;
-        topDownSplitMerge(a, begin, middle, b);
-        topDownSplitMerge(a, middle, end, b);
-        mergeLists(a, begin, middle, end, b);
-
-        System.arraycopy(b, begin, a, begin, end - begin);
-    }
-
-    private static void mergeLists(int[] a, int begin, int middle, int end, int[] b) {
-        int i = begin, j = middle;
-
-        for (int k = begin; k < end; ++k) {
-            if (i < middle && (j >= end || a[i] <= a[j])) {
-                b[k] = a[i];
-                ++i;
-            } else {
-                b[k] = a[j];
                 ++j;
             }
         }

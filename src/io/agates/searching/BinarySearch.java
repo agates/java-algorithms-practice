@@ -20,7 +20,7 @@ public class BinarySearch {
     }
 
     private static <T extends Comparable<T>> int binarySearchRecursive(List<T> a, T item, int lower, int upper) {
-        if (lower > upper || upper >= a.size() || a == null) {
+        if (lower > upper || a == null || upper >= a.size()) {
             return -1;
         }
 

@@ -68,6 +68,10 @@ public class HashMapTest {
         assertEquals(h.size(), 1);
         assertTrue(h.get("foo") == 1);
 
+        h.put("foo", 2);
+        assertEquals(h.size(), 1);
+        assertTrue(h.get("foo") == 2);
+
         h.remove("foo");
         assertEquals(h.size(), 0);
     }

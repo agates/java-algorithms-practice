@@ -69,11 +69,11 @@ public class HashMap<K, V> implements Map<K, V> {
         int hashCode = key.hashCode();
         int index = hashCode % buckets.length;
 
+        remove(key);
+
         if (buckets[index] == null) {
             buckets[index] = new LinkedList<>();
         }
-
-        remove(key);
 
         buckets[index].push(new MapEntry(key, value));
 

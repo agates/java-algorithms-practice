@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Random r = new Random();
 
-        for (int length = 1; length <= Math.pow(2, 26); length *= 2) {
+        for (int length = 1; length <= Math.pow(2, 16); length *= 2) {
             List<Integer> array = Arrays.stream(r.ints(length, 0, length).toArray())
                     .boxed()
                     .collect(Collectors.toList());

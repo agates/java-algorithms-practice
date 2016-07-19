@@ -1,32 +1,31 @@
 package io.agates.datastructures.map;
 
-import groovy.util.MapEntry;
+import io.agates.datastructures.tree.BinarySearchTreeGraph;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by agates on 7/12/16.
  */
-public class HashMap<K, V> implements Map<K, V> {
+public class HashMap<K extends Comparable<? super K>, V> implements Map<K, V> {
     private float fillRatio;
 
-    private LinkedList<Entry<K, V>>[] buckets;
+    private BinarySearchTreeGraph<K, V>[] buckets;
 
     public HashMap(int initialSize, float fillRatio) {
         this.fillRatio = fillRatio;
 
-        buckets = (LinkedList<Entry<K, V>>[]) new LinkedList[initialSize];
+        buckets = (BinarySearchTreeGraph<K, V>[]) new BinarySearchTreeGraph[initialSize];
     }
 
     @Override
     public int size() {
         int size = 0;
-        for (LinkedList<Entry<K, V>> o : buckets) {
+        for (BinarySearchTreeGraph<K, V> o : buckets) {
             if (o != null) {
-                size += o.size();
+                size += o.getNumNodes();
             }
         }
 
@@ -54,11 +53,7 @@ public class HashMap<K, V> implements Map<K, V> {
         int index = hashCode % buckets.length;
 
         if (buckets[index] != null) {
-            for (Entry<K, V> bucketEntry : buckets[index]) {
-                if (bucketEntry.getKey().equals(key)) {
-                    return bucketEntry.getValue();
-                }
-            }
+            return buckets[index].lookup((K) key);
         }
 
         return null;
@@ -72,10 +67,10 @@ public class HashMap<K, V> implements Map<K, V> {
         remove(key);
 
         if (buckets[index] == null) {
-            buckets[index] = new LinkedList<>();
+            buckets[index] = new BinarySearchTreeGraph<>();
         }
 
-        buckets[index].push(new MapEntry(key, value));
+        buckets[index].insert(key, value);
 
         return value;
     }
@@ -87,20 +82,9 @@ public class HashMap<K, V> implements Map<K, V> {
 
 
         if (buckets[index] != null) {
-            Entry<K, V> removeEntry = null;
-            for (Entry<K, V> bucketEntry : buckets[index]) {
-                if (bucketEntry.getKey().equals(key)) {
-                    removeEntry = bucketEntry;
-                    break;
-                }
-            }
-            if (removeEntry != null) {
-                buckets[index].remove(removeEntry);
-                if (buckets[index].size() == 0) {
-                    buckets[index] = null;
-                }
-                return removeEntry.getValue();
-            }
+            V temp = buckets[index].lookup((K) key);
+            buckets[index].delete((K) key);
+            return temp;
         }
 
         return null;

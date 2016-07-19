@@ -66,6 +66,7 @@ public class BinarySearchTreeGraph<K extends Comparable<? super K>, V> {
             // This guarantees the order of our tree
             BinaryTreeNode<K, V> temp = smallestNode(node.getRight());
             node.setKey(temp.getKey());
+            node.setValue(temp.getValue());
 
             // Delete the "smallest node" since we've replaced it
             node.setRight(delete(node.getRight(), temp.getKey()));

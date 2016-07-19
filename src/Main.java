@@ -1,7 +1,8 @@
-import io.agates.searching.BinarySearch;
-import io.agates.sorting.Merge;
+import io.agates.datastructures.tree.BinarySearchTreeGraph;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -12,17 +13,30 @@ public class Main {
             List<Integer> array = Arrays.stream(r.ints(length, 0, length).toArray())
                     .boxed()
                     .collect(Collectors.toList());
-            List<Integer> workList = new ArrayList<>(Collections.nCopies(array.size(), 0));
+            //List<Integer> workList = new ArrayList<>(Collections.nCopies(array.size(), 0));
+
+            BinarySearchTreeGraph<Integer, Integer> bst = new BinarySearchTreeGraph<>();
+
+            for (Integer a :
+                    array) {
+                bst.insert(a, a);
+            }
 
             Integer searchItem = array.get(array.size() / 2);
+            Integer low = -100;
+            Integer high = length + 100;
 
-            Merge.bottomUpMergeSort(array, workList);
+            System.out.println(searchItem + " exists: " + bst.lookup(searchItem).equals(searchItem));
+            System.out.println(low + " (low) exists: " + (bst.lookup(low) != null));
+            System.out.println(high + " (high) exists: " + (bst.lookup(high) != null));
 
-            boolean sorted = isSorted(array);
+            //Merge.bottomUpMergeSort(array, workList);
+
+            //boolean sorted = isSorted(array);
             // TODO: Add some tests and timing information
 
             //int index = BinarySearch.binarySearchRecursive(array, searchItem);
-            int index = BinarySearch.binarySearchIterative(array, searchItem);
+            //int index = BinarySearch.binarySearchIterative(array, searchItem);
         }
     }
 

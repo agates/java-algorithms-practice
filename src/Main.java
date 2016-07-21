@@ -1,4 +1,4 @@
-import io.agates.datastructures.tree.BinarySearchTreeGraph;
+import io.agates.searching.BinarySearch;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,12 @@ public class Main {
     public static void main(String[] args) {
         Random r = new Random();
 
-        for (int length = 1; length <= Math.pow(2, 16); length *= 2) {
+        //int[] a = {1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 6, 7};
+        int[] a = {1, 2, 2, 2, 3, 3, 3, 3, 3, 3};
+        List<Integer> array = Arrays.stream(a).boxed().collect(Collectors.toList());
+        System.out.println("Array has majority value? " + BinarySearch.hastMajorityValue(array));
+
+        /*for (int length = 1; length <= Math.pow(2, 16); length *= 2) {
             List<Integer> array = Arrays.stream(r.ints(length, 0, length).toArray())
                     .boxed()
                     .collect(Collectors.toList());
@@ -37,7 +42,7 @@ public class Main {
 
             //int index = BinarySearch.binarySearchRecursive(array, searchItem);
             //int index = BinarySearch.binarySearchIterative(array, searchItem);
-        }
+        }*/
     }
 
     private static <T extends Comparable<T>> boolean isSorted(List<T> l) {

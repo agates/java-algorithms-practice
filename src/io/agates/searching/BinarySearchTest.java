@@ -5,9 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by agates on 7/9/16.
@@ -149,6 +151,86 @@ public class BinarySearchTest {
             a.add(c);
         }
         int index = BinarySearch.binarySearchIterative(a, a.get(50));
+
+        assertEquals(index, 50);
+    }
+
+    @Test
+    public void binarySearchFirstOccurrenceEmpty() throws Exception {
+        List<Integer> a = new ArrayList<>();
+        int index = BinarySearch.binarySearchFirstOccurrence(a, 10);
+
+        assertEquals(index, -1);
+    }
+
+    @Test
+    public void binarySearchFirstOccurrence() throws Exception {
+        int[] array = {1, 2, 2, 3, 3, 3, 3, 3, 3, 5, 6, 7};
+        List<Integer> a = Arrays.stream(array).boxed().collect(Collectors.toList());
+
+        int index = BinarySearch.binarySearchFirstOccurrence(a, 3);
+
+        assertEquals(index, 3);
+    }
+
+    @Test
+    public void binarySearchFirstOccurrenceOddSize() throws Exception {
+        int[] array = {1, 2, 2, 3, 3, 3, 3, 3, 3, 5, 6};
+        List<Integer> a = Arrays.stream(array).boxed().collect(Collectors.toList());
+
+        int index = BinarySearch.binarySearchFirstOccurrence(a, 3);
+
+        assertEquals(index, 3);
+    }
+
+    @Test
+    public void binarySearchFirstOccurrenceUnique() throws Exception {
+        List<Integer> a = new ArrayList<>();
+        for (int c = 0; c < 100; ++c) {
+            a.add(c);
+        }
+
+        int index = BinarySearch.binarySearchFirstOccurrence(a, 50);
+
+        assertEquals(index, 50);
+    }
+
+    @Test
+    public void binarySearchLastOccurrenceEmpty() throws Exception {
+        List<Integer> a = new ArrayList<>();
+        int index = BinarySearch.binarySearchLastOccurrence(a, 10);
+
+        assertEquals(index, -1);
+    }
+
+    @Test
+    public void binarySearchLastOccurrence() throws Exception {
+        int[] array = {1, 2, 2, 3, 3, 3, 3, 3, 3, 5, 6, 7};
+        List<Integer> a = Arrays.stream(array).boxed().collect(Collectors.toList());
+
+        int index = BinarySearch.binarySearchLastOccurrence(a, 3);
+
+        assertEquals(index, 8);
+    }
+
+    @Test
+    public void binarySearchLastOccurrenceOddSize() throws Exception {
+        int[] array = {1, 2, 2, 3, 3, 3, 3, 3, 3, 5, 6};
+        List<Integer> a = Arrays.stream(array).boxed().collect(Collectors.toList());
+
+        int index = BinarySearch.binarySearchLastOccurrence(a, 3);
+
+        assertEquals(index, 8);
+    }
+
+    @Test
+    public void binarySearchLastOccurrenceUnique() throws Exception {
+        List<Integer> a = new ArrayList<>();
+        for (int c = 0; c < 100; ++c) {
+            a.add(c);
+        }
+
+        int index = BinarySearch.binarySearchLastOccurrence(a, 50);
 
         assertEquals(index, 50);
     }

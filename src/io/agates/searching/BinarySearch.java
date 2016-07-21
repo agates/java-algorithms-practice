@@ -73,7 +73,7 @@ public class BinarySearch {
             } else if (comparison < 0) {
                 upper = mid - 1;
             } else if (lower != mid) {
-                // Rescan (increase) the search area until the lower index is the first occurrence
+                // Scan the rest of the the search area until the lower index is the first occurrence
                 upper = mid;
             } else {
                 return mid;
@@ -100,7 +100,7 @@ public class BinarySearch {
             } else if (comparison < 0) {
                 upper = mid - 1;
             } else if (upper != mid) {
-                // Rescan (increase) the search area until the upper index is the last occurrence
+                // Scan the rest of the the search area until the upper index is the last occurrence
                 lower = mid;
             } else {
                 return mid;
